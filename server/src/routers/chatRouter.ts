@@ -1,0 +1,77 @@
+import express from "express";
+import getChat from "../services/chat/getChat";
+import passport from "passport";
+import getChats from "@/services/chat/getChats";
+import createChat from "@/services/chat/createGroup";
+import { uploader } from "@/lib/uploader";
+import addMember from "@/services/chat/addMember";
+import getMembers from "@/services/chat/getMembers";
+import isPrivate from "@/services/chat/isPrivate";
+import togglePrivate from "@/services/chat/togglePrivate";
+
+import goToChat from "@/services/chat/goToChat";
+import searchChat from "@/services/chat/searchChat";
+import leaveChat from "@/services/chat/leaveChat";
+import editChat from "@/services/chat/editChat";
+const chatRouter = express.Router();
+chatRouter.get(
+  "/getChat/:id",
+  passport.authenticate("jwt", { session: false }),
+  getChat
+);
+chatRouter.get(
+  "/getChats",
+  passport.authenticate("jwt", { session: false }),
+  getChats
+);
+chatRouter.get(
+  "/getMembers/:id",
+  passport.authenticate("jwt", { session: false }),
+  getMembers
+);
+chatRouter.get(
+  "/isPrivate/:id",
+  passport.authenticate("jwt", { session: false }),
+  isPrivate
+);
+chatRouter.get(
+  "/searchChat",
+  passport.authenticate("jwt", { session: false }),
+  searchChat
+);
+
+chatRouter.patch(
+  "/leaveChat/:id",
+  passport.authenticate("jwt", { session: false }),
+  leaveChat
+);
+chatRouter.patch(
+  "/togglePrivate/:id",
+  passport.authenticate("jwt", { session: false }),
+  togglePrivate
+);
+chatRouter.patch(
+  "/addMember",
+  passport.authenticate("jwt", { session: false }),
+  addMember
+);
+chatRouter.patch(
+  "/goToChat/:id",
+  passport.authenticate("jwt", { session: false }),
+  goToChat
+);
+chatRouter.patch(
+  "/editChat",
+  passport.authenticate("jwt", { session: false }),
+  uploader.single("image"),
+  editChat
+);
+
+chatRouter.post(
+  "/createChat",
+  passport.authenticate("jwt", { session: false }),
+  uploader.single("image"),
+  createChat
+);
+
+export default chatRouter;

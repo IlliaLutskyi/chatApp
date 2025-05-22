@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist", // Compiled files go to 'dist'
+    "rootDir": "./src", // Source files are in 'src'
+    "target": "ESNext", // Use the latest ECMAScript features
+    "module": "ESNext", // Use ESNext modules
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "baseUrl": "./", // Base directory for resolving paths
+    "paths": {
+      "@/*": ["src/*"] // Map '@/' to the 'src' directory
+    },
+    "strict": true
+  },
+  "include": ["src"]
+}
