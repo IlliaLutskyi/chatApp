@@ -7,7 +7,7 @@ async function login(req: Request, res: Response, next: NextFunction) {
   const { email, password } = req.body;
   try {
     if (!email || !password) {
-      res.status(400).json({ message: "" });
+      res.status(400).json({ message: "All fields are required" });
       return;
     }
     const user = await prisma.user.findUnique({
@@ -47,8 +47,7 @@ async function login(req: Request, res: Response, next: NextFunction) {
     return;
   } catch (err) {
     res.status(500).json({
-      message:
-        err instanceof Error ? err.message : "Server faild to log you in",
+      message: "Server faild to log you in",
     });
     return;
   }

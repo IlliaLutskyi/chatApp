@@ -17,8 +17,7 @@ async function issueGoogleToken(req: Request, res: Response) {
     return;
   } catch (err) {
     res.status(500).json({
-      message:
-        err instanceof Error ? err.message : "Could not generate jwt token",
+      message: "Could not generate jwt token",
     });
     return;
   }

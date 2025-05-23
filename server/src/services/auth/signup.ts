@@ -28,7 +28,7 @@ async function signup(req: Request, res: Response) {
     res.status(201).json({ message: "You were successfully signed up" });
   } catch (err) {
     res.status(500).json({
-      message: err instanceof Error ? err.message : "Could not register you",
+      message: "Could not register you",
     });
   }
 }
