@@ -2,33 +2,17 @@ import { Box, Button } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import BackspaceIcon from "@mui/icons-material/Backspace";
 import useSelectionModeStore from "../../../stores/useSelectionModeStore";
-import { useMutation } from "@tanstack/react-query";
-import { api } from "../../../lib/api";
-import { toast } from "sonner";
-import axios from "axios";
+import { socket } from "@/lib/io";
 
 const SelectionModeBar = () => {
-  const { setIsOn, isOn, setSelectedMessages, selectedMessages } =
+  const { setIsOn, setSelectedMessages, selectedMessages } =
     useSelectionModeStore((state) => state);
-  const mutation = useMutation({
-    mutationFn: async (messages: number[]) => {
-      const data = await api.patch("/messages/deleteMessages", messages, {
-        withCredentials: true,
-      });
-      return data.data.message as string;
-    },
-    onSuccess: () => {
-      setIsOn(false);
-      setSelectedMessages([]);
-      return toast.success("Messages deleted");
-    },
-    onError: (err) => {
-      if (axios.isAxiosError(err))
-        return toast.error(err.response?.data.message);
-    },
-  });
+  console.log(selectedMessages);
   function handleDelete() {
-    mutation.mutate(selectedMessages);
+    if (selectedMessages.length === 0) return;
+    socket.emit("deleteMessages", selectedMessages);
+    setIsOn(false);
+    setSelectedMessages([]);
   }
   return (
     <Box className="flex gap-2 items-center w-1/2  justify-between mx-auto my-10 bg-white p-4 rounded-lg ">

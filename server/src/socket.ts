@@ -38,8 +38,8 @@ function setupSocket(server: HttpServer) {
       socket.emit("message", await sendMessages(chatId));
     });
 
-    socket.on("deleteMessage", async (messageId) => {
-      await deleteMessage(messageId);
+    socket.on("deleteMessages", async (messages: number[]) => {
+      await deleteMessage(messages);
 
       io.to(`chat_${chatId}`).emit("message", await sendMessages(chatId));
     });

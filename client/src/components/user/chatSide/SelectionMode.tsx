@@ -12,8 +12,7 @@ const SelectionMode = () => {
   const [searchParams] = useSearchParams();
   const scrollToRef = useRef<HTMLDivElement>(null);
   const user = useUserStore((state) => state.user);
-
-  const { setSelectedMessage, selectedMessages } = useSelectionModeStore(
+  const { setSelectedMessage, selectedMessages, isOn } = useSelectionModeStore(
     (state) => state
   );
   const [messages, setMessages] = useState<TMessage[]>();
@@ -29,7 +28,7 @@ const SelectionMode = () => {
     return () => {
       socket.off("message", getMessages);
     };
-  }, [searchParams]);
+  }, [searchParams, isOn]);
   return (
     <Box>
       <Box
@@ -37,8 +36,7 @@ const SelectionMode = () => {
         id="scrollBar"
       >
         {messages?.map((message) => {
-          if (message.userId !== user?.id) return;
-
+          if (message.userId !== user?.id) return null;
           return (
             <Box
               className={`flex gap-3 items-center justify-between ${
@@ -51,7 +49,7 @@ const SelectionMode = () => {
               }}
             >
               <Checkbox checked={selectedMessages.includes(message.id)} />
-              <Message message={message} key={message.id} />
+              <Message message={message} />
             </Box>
           );
         })}

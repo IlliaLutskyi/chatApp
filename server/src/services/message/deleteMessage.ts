@@ -1,12 +1,8 @@
 import prisma from "@/lib/db";
 
-async function deleteMessage(id: number) {
+async function deleteMessage(messages: number[]) {
   try {
-    await prisma.message.delete({
-      where: {
-        id,
-      },
-    });
+    await prisma.message.deleteMany({ where: { id: { in: messages } } });
   } catch (err) {
     console.log(err);
   }

@@ -17,6 +17,7 @@ const Message = ({ message }: props) => {
       initial={{ scale: 0 }}
       animate={{ scale: 1 }}
       transition={{ duration: 0.3 }}
+      key={message.id}
       className={`${
         message.userId === user?.id ? "self-end  " : "self-start"
       } flex gap-3 items-center`}
