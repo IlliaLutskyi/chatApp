@@ -9,6 +9,7 @@ import { Box, Button } from "@mui/material";
 import axios from "axios";
 import { useSearchParams } from "react-router";
 import BackButton from "./Buttons/BackButton";
+import { toast } from "sonner";
 
 const chatSchema = z.object({
   title: z.string().min(1, "Group name is required"),
@@ -50,11 +51,11 @@ const EditChat = ({ chat }: props) => {
         queryKey: ["chat", searchParams.get("chat")],
       });
       await query.invalidateQueries({ queryKey: ["chats"] });
-      return;
+      return toast.success("Group edited successfully");
     },
     onError(err) {
-      if (axios.isAxiosError(err)) alert(err.response?.data.message);
-      return;
+      if (axios.isAxiosError(err))
+        return toast.error(err.response?.data.message);
     },
   });
   function onSubmit(edits: formData) {

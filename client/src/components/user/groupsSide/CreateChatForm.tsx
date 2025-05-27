@@ -8,6 +8,8 @@ import { QueryClient, useMutation } from "@tanstack/react-query";
 import { api } from "../../../lib/api";
 import useGroupSideMenuStore from "../../../stores/useGroupSideMenuStore";
 import { AnimatePresence, motion } from "framer-motion";
+import { toast } from "sonner";
+import axios from "axios";
 const MotionBox = motion(Box);
 const GroupSchema = z.object({
   title: z.string().min(1, "Group name is required"),
@@ -46,10 +48,12 @@ const CreateChatForm = () => {
       await queryClient.refetchQueries({
         queryKey: ["groups"],
       });
+      toast.success("Group created successfully");
       return setCurrentOption("default");
     },
     onError(err) {
-      alert(err);
+      if (axios.isAxiosError(err))
+        return toast.error(err.response?.data.message);
     },
   });
   async function onSubmit(group: group) {

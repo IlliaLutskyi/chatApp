@@ -1,15 +1,17 @@
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { motion } from "framer-motion";
 import useUserStore from "../../../stores/useUserStore";
 import { Message as TMessage } from "../../../types/Message";
 import OptimizedImage from "../../common/OptimizedImage";
-import DeleteIcon from "@mui/icons-material/Delete";
+import useSelectionModeStore from "../../../stores/useSelectionModeStore";
+
 const MotionBox = motion(Box);
 type props = {
   message: TMessage;
 };
 const Message = ({ message }: props) => {
   const user = useUserStore((state) => state.user);
+  const setSelectionMode = useSelectionModeStore((store) => store.setIsOn);
   return (
     <MotionBox
       initial={{ scale: 0 }}
@@ -48,7 +50,14 @@ const Message = ({ message }: props) => {
               <Typography className="text-center" fontFamily={"cursive"}>
                 {message?.content}
               </Typography>
-              <Typography className="self-end !text-xs">
+              <Typography
+                className="self-end !text-xs"
+                onClick={() => {
+                  if (user?.id === message.userId) {
+                    setSelectionMode(true);
+                  }
+                }}
+              >
                 {new Date(message.createdAt).toTimeString().split(" ")[0]}
               </Typography>
             </Box>
@@ -57,7 +66,15 @@ const Message = ({ message }: props) => {
               <Typography className="text-center" fontFamily={"cursive"}>
                 {message?.content}
               </Typography>
-              <Typography className="self-end !text-xs">
+
+              <Typography
+                className="self-end !text-xs"
+                onClick={() => {
+                  if (user?.id === message.userId) {
+                    setSelectionMode(true);
+                  }
+                }}
+              >
                 {new Date(message.createdAt).toTimeString().split(" ")[0]}
               </Typography>
             </Box>

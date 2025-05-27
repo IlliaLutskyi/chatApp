@@ -10,6 +10,7 @@ import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 import { api } from "../lib/api";
 import axios from "axios";
+import { toast } from "sonner";
 
 const UserSchema = z.object({
   email: z.string(),
@@ -23,7 +24,6 @@ const Login = () => {
   const { register, handleSubmit, formState } = useForm<User>({
     resolver: zodResolver(UserSchema),
   });
-  const [message, setMessage] = useState("");
 
   const mutation = useMutation({
     async mutationFn(user: User) {
@@ -33,12 +33,12 @@ const Login = () => {
       return data.data.message as string;
     },
     onSuccess() {
+      toast.success("Login successful");
       return navigate("/", { replace: true });
     },
     onError(err) {
       if (axios.isAxiosError(err)) {
-        alert(err.response?.data.message);
-        return setMessage(err.response?.data.message);
+        return toast.error(err.response?.data.message);
       }
     },
   });
@@ -56,13 +56,6 @@ const Login = () => {
       <Typography sx={{ fontSize: "2rem", textAlign: "center" }}>
         Log in
       </Typography>
-      {mutation.isError && (
-        <Typography
-          sx={{ fontSize: "0.9rem", textAlign: "center", color: "red" }}
-        >
-          {message}
-        </Typography>
-      )}
       <Input
         register={register}
         label="Email"

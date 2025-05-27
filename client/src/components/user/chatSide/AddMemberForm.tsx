@@ -10,6 +10,7 @@ import { Button, Typography } from "@mui/material";
 import axios from "axios";
 import { useEffect, useRef } from "react";
 import { useSearchParams } from "react-router";
+import { toast } from "sonner";
 
 const FormSchema = z.object({
   phone_number: z.string().min(1, "Phone number is required"),
@@ -38,10 +39,12 @@ const AddMemberForm = () => {
       await queryClient.invalidateQueries({
         queryKey: ["chatMembers", searchParams.get("chat")],
       });
+      toast.success("Member added successfully");
       return toggle(false);
     },
     onError(err) {
-      if (axios.isAxiosError(err)) return alert(err.message);
+      if (axios.isAxiosError(err))
+        return toast.error(err.response?.data.message);
     },
   });
   const FormRef = useRef<HTMLFormElement>(null);

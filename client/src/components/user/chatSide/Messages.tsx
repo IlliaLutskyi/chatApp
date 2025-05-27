@@ -27,7 +27,7 @@ const Messages = () => {
 
   return (
     <Box
-      className="flex flex-col gap-4 p-10 overflow-y-auto h-[400px] flex-grow-1 !text-9xl"
+      className="flex flex-col gap-4 p-10 overflow-y-auto h-[400px] grow "
       id="scrollBar"
     >
       {messages?.map((message) => (

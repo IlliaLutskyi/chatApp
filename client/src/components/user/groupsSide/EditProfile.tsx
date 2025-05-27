@@ -9,6 +9,8 @@ import Input from "../../common/Input";
 import useUserStore from "../../../stores/useUserStore";
 import { useForm } from "react-hook-form";
 import useGroupSideMenuStore from "../../../stores/useGroupSideMenuStore";
+import { toast } from "sonner";
+import axios from "axios";
 
 const MotionBox = motion(Box);
 
@@ -58,11 +60,13 @@ const EditProfile = () => {
       return data.data.message as string;
     },
     onError(err) {
-      return alert(err);
+      if (axios.isAxiosError(err))
+        return toast.error(err.response?.data.message);
     },
 
     async onSuccess() {
       await query.invalidateQueries({ queryKey: ["user"], exact: true });
+      toast.success("Profile edited successfully");
       return setCurrentOption("profile");
     },
   });

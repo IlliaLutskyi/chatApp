@@ -10,6 +10,7 @@ import { Home, Login, Signup } from "./pages";
 import ReactGueryWraper from "./components/wrappers/ReactGueryWrapper";
 import isAuthenticated from "./utils/isAuthenticated";
 import ErrorBoundary from "./components/ErrorBoundary";
+import { Toaster } from "./components/ui/sonner";
 
 const router = createBrowserRouter([
   {
@@ -50,6 +51,7 @@ createRoot(document.getElementById("root")!).render(
     <></>
     <ReactGueryWraper>
       <RouterProvider router={router} />
+      <Toaster />
     </ReactGueryWraper>
   </StrictMode>
 );
