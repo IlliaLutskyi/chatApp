@@ -49,7 +49,7 @@ function setupSocket(server: HttpServer) {
 
       if (m.type === "file") {
         await saveMessage({
-          image: m.file,
+          image: m.url,
           message: m.message,
           type: m.type,
           chatId,

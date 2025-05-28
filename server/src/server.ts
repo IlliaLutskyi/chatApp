@@ -11,7 +11,6 @@ import "@/auth/GoogleStrategy";
 import "@/lib/cloudinary";
 import chatRouter from "./routers/chatRouter";
 import setupSocket from "./socket";
-import messageRouter from "./routers/messageRouter";
 
 dotenv.config();
 
@@ -31,7 +30,6 @@ app.use(passport.initialize());
 app.use("/", authRouter);
 app.use("/users", userRouter);
 app.use("/chats", chatRouter);
-app.use("/messages", messageRouter);
 
 setupSocket(server);
 

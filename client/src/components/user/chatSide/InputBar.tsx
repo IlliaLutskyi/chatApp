@@ -3,42 +3,23 @@ import SendIcon from "@mui/icons-material/Send";
 import { socket } from "../../../lib/io";
 import { useState } from "react";
 import UploadFileIcon from "@mui/icons-material/UploadFile";
-import { api } from "../../../lib/api";
-import { useMutation } from "@tanstack/react-query";
-import axios from "axios";
 import SelectedFile from "./SelectedFile";
 import { getUrl } from "../../../utils/getUrl";
 const InputBar = () => {
-  const mutation = useMutation({
-    mutationFn: async (file: File) => {
-      const formData = new FormData();
-      formData.append("file", file);
-      const data = await api.patch("/messages/sendFile", formData, {
-        withCredentials: true,
-      });
-      return data.data.url;
-    },
-    onError(err) {
-      if (axios.isAxiosError(err)) alert(err.response?.data.message);
-    },
-  });
   const [message, setMessage] = useState("");
   const [file, setFile] = useState<File>();
   const [url, setUrl] = useState("");
 
   async function sendMessage() {
-    if (file) {
-      const url = await mutation.mutateAsync(file);
-      if (url) {
-        socket.emit("message", {
-          message,
-          file: url,
-          type: "file",
-        });
-        setMessage("");
-        setFile(undefined);
-        setUrl("");
-      }
+    if (file && url) {
+      socket.emit("message", {
+        message,
+        url,
+        type: "file",
+      });
+      setMessage("");
+      setFile(undefined);
+      setUrl("");
     } else {
       if (!message) return;
       socket.emit("message", { message, type: "text" });
