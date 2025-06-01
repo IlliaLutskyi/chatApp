@@ -1,9 +1,6 @@
-import { chatUsers } from "../../../prisma/generated/client";
-import fs from "fs";
-import cloudinary from "cloudinary";
 import prisma from "@/lib/db";
 import { Request, Response } from "express";
-import { connect } from "http2";
+import { getImageString } from "@/utils/getImageString";
 
 async function createChat(req: Request, res: Response) {
   const { title } = req.body;
@@ -12,12 +9,7 @@ async function createChat(req: Request, res: Response) {
   const userId = req.user && "id" in req.user ? (req.user.id as number) : null;
   try {
     if (image) {
-      const { url } = await cloudinary.v2.uploader.upload(image.path, {
-        folder: "chatImages",
-        public_id: userId ? userId.toString() : "",
-      });
-      imageUrl = url;
-      fs.unlinkSync(image.path);
+      imageUrl = getImageString(image);
     }
     await prisma.chat.create({
       data: {

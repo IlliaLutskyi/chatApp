@@ -1,5 +1,4 @@
 import { Box, Button, Typography } from "@mui/material";
-import BackButton from "./Buttons/BackButton";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import Input from "../../common/Input";
@@ -10,6 +9,7 @@ import useGroupSideMenuStore from "../../../stores/useGroupSideMenuStore";
 import { AnimatePresence, motion } from "framer-motion";
 import { toast } from "sonner";
 import axios from "axios";
+import BackButton from "../../common/BackButton";
 const MotionBox = motion(Box);
 const GroupSchema = z.object({
   title: z.string().min(1, "Group name is required"),
@@ -70,7 +70,7 @@ const CreateChatForm = () => {
       >
         <Box className="flex  justify-between sm:gap-4 m-2">
           <Box className="flex gap-4 items-center">
-            <BackButton toOption="default" />
+            <BackButton onClick={() => setCurrentOption("default")} />
             <Typography className="!text-white !text-lg">
               Create group
             </Typography>

@@ -8,8 +8,9 @@ import { api } from "../../../lib/api";
 import { Box, Button } from "@mui/material";
 import axios from "axios";
 import { useSearchParams } from "react-router";
-import BackButton from "./Buttons/BackButton";
+import BackButton from "../../common/BackButton";
 import { toast } from "sonner";
+import useChatSideMenuStore from "@/stores/useChatSideMenuStore";
 
 const chatSchema = z.object({
   title: z.string().min(1, "Group name is required"),
@@ -29,7 +30,11 @@ type formData = z.infer<typeof chatSchema>;
 type props = {
   chat: Chat | undefined;
 };
+
 const EditChat = ({ chat }: props) => {
+  const setCurrentOption = useChatSideMenuStore(
+    (store) => store.setCurrentOption
+  );
   const { register, handleSubmit, formState, setValue } = useForm<formData>({
     resolver: zodResolver(chatSchema),
   });
@@ -64,7 +69,7 @@ const EditChat = ({ chat }: props) => {
   return (
     <Box className="flex flex-col ">
       <Box className="my-2">
-        <BackButton option="default" />
+        <BackButton onClick={() => setCurrentOption("default")} />
       </Box>
       <form
         className="flex flex-col gap-2 mx-4"

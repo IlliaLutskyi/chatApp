@@ -8,11 +8,15 @@ import { toast } from "sonner";
 const SelectionModeBar = () => {
   const { setIsOn, setSelectedMessages, selectedMessages } =
     useSelectionModeStore((state) => state);
-  console.log(selectedMessages);
+
   function handleDelete() {
     if (selectedMessages.length === 0) return;
     socket.emit("deleteMessages", selectedMessages);
-    toast.success("Messages deleted successfully");
+    toast.success(
+      `${
+        selectedMessages.length > 1 ? "Messages" : "Message"
+      } deleted successfully`
+    );
     setIsOn(false);
     setSelectedMessages([]);
   }
@@ -28,6 +32,7 @@ const SelectionModeBar = () => {
       >
         <BackspaceIcon />
       </Button>
+
       <Button
         variant="contained"
         color="error"

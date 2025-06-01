@@ -1,5 +1,4 @@
 import { Box, Button, Typography } from "@mui/material";
-import BackButton from "./Buttons/BackButton";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -11,6 +10,7 @@ import { useForm } from "react-hook-form";
 import useGroupSideMenuStore from "../../../stores/useGroupSideMenuStore";
 import { toast } from "sonner";
 import axios from "axios";
+import BackButton from "../../common/BackButton";
 
 const MotionBox = motion(Box);
 
@@ -85,7 +85,7 @@ const EditProfile = () => {
       >
         <Box className="flex gap-4 justify-between sm:gap-4 m-2">
           <Box className="flex gap-4 items-center">
-            <BackButton toOption="profile" />
+            <BackButton onClick={() => setCurrentOption("profile")} />
             <Typography className="!text-white !text-lg">
               Edit profile
             </Typography>

@@ -48,7 +48,10 @@ const SelectionMode = () => {
                 setSelectedMessage(message.id);
               }}
             >
-              <Checkbox checked={selectedMessages.includes(message.id)} />
+              <Checkbox
+                checked={selectedMessages.includes(message.id)}
+                color="secondary"
+              />
               <Message message={message} />
             </Box>
           );

@@ -75,7 +75,7 @@ const AddMemberForm = () => {
           transition={{ duration: 0.4 }}
           method="post"
           onSubmit={handleSubmit(onSubmit)}
-          className="flex flex-col gap-2 absolute top-1/2 left-1/2 translate-y-[-50%] translate-x-[-50%] p-8 w-1/3 bg-white rounded-lg"
+          className="flex flex-col gap-2 absolute top-1/2 left-1/2 translate-y-[-50%] translate-x-[-50%] p-8 w-1/3 bg-white rounded-lg z-10"
           ref={FormRef}
         >
           <Typography className="!font-bold !text-xl text-center mb-2">

@@ -1,12 +1,14 @@
 import { Box, Typography } from "@mui/material";
-import CloseButton from "./Buttons/CloseButton";
-import EditButton from "./Buttons/EditButton";
+import CloseButton from "../../common/CloseButton";
+import EditButton from "../../common/EditButton";
 import AdminPanel from "./AdminPanel";
 import LeaveChatButton from "./Buttons/LeaveChatButton";
 import { Chat } from "../../../types/Chat";
 import { User } from "../../../types/User";
 import useUserStore from "../../../stores/useUserStore";
 import OptimizedImage from "../../common/OptimizedImage";
+import useChatSettingsStore from "@/stores/useChatSettingsStore";
+import useChatSideMenuStore from "@/stores/useChatSideMenuStore";
 
 type props = {
   chat: Chat | undefined;
@@ -14,11 +16,15 @@ type props = {
 };
 const Chat_Info = ({ chat, members }: props) => {
   const user = useUserStore((store) => store.user);
+  const setCurrentOption = useChatSideMenuStore(
+    (store) => store.setCurrentOption
+  );
+  const toggleSettings = useChatSettingsStore((store) => store.toggle);
   return (
     <Box className="flex flex-col gap-2 !text-white h-full">
       <Box className="flex gap-4 items-center justify-between my-2">
-        <CloseButton />
-        <EditButton />
+        <CloseButton onClick={() => toggleSettings(false)} />
+        <EditButton onClick={() => setCurrentOption("edit_chat")} />
       </Box>
 
       <Box

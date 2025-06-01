@@ -4,6 +4,8 @@ import useUserStore from "../../../stores/useUserStore";
 import { Message as TMessage } from "../../../types/Message";
 import OptimizedImage from "../../common/OptimizedImage";
 import useSelectionModeStore from "../../../stores/useSelectionModeStore";
+import MessageActions from "./MessageActions";
+import { useEffect, useRef, useState } from "react";
 
 const MotionBox = motion(Box);
 type props = {
@@ -12,15 +14,30 @@ type props = {
 const Message = ({ message }: props) => {
   const user = useUserStore((state) => state.user);
   const setSelectionMode = useSelectionModeStore((store) => store.setIsOn);
+  const [IsOpen, setIsOpen] = useState(false);
+  const messageRef = useRef<HTMLDivElement>(null);
+  function clickOutside(e: MouseEvent) {
+    if (!messageRef?.current?.contains(e.target as HTMLElement))
+      setIsOpen(false);
+  }
+
+  useEffect(() => {
+    document.addEventListener("click", clickOutside);
+    return () => document.removeEventListener("click", clickOutside);
+  }, []);
+
   return (
     <MotionBox
       initial={{ scale: 0 }}
       animate={{ scale: 1 }}
       transition={{ duration: 0.3 }}
       key={message.id}
+      id="message"
+      ref={messageRef}
+      onClick={() => setIsOpen(!IsOpen)}
       className={`${
         message.userId === user?.id ? "self-end  " : "self-start"
-      } flex gap-3 items-center`}
+      } relative flex gap-3 items-center`}
     >
       <Box className="self-end">
         <OptimizedImage
@@ -82,6 +99,9 @@ const Message = ({ message }: props) => {
           )}
         </Box>
       </Box>
+      {message.userId == user?.id && (
+        <MessageActions isOpen={IsOpen} message={message} />
+      )}
     </MotionBox>
   );
 };

@@ -6,6 +6,7 @@ import sendMessages from "./services/message/sendMessages";
 import deleteMessage from "./services/message/deleteMessage";
 import saveMessage from "./services/message/saveMessage";
 import retrieveToken from "./utils/retrieveToken";
+import editMessage from "./services/message/editMessage";
 
 function setupSocket(server: HttpServer) {
   const io = new Server(server, {
@@ -44,21 +45,26 @@ function setupSocket(server: HttpServer) {
       io.to(`chat_${chatId}`).emit("message", await sendMessages(chatId));
     });
 
-    socket.on("message", async (m) => {
+    socket.on("editMessage", async (message) => {
+      await editMessage(message.id, message.content);
+      io.to(`chat_${chatId}`).emit("message", await sendMessages(chatId));
+    });
+
+    socket.on("message", async (message) => {
       if (chatId === null) return;
 
-      if (m.type === "file") {
+      if (message.type === "file") {
         await saveMessage({
-          image: m.url,
-          message: m.message,
-          type: m.type,
+          image: message.url,
+          message: message.message,
+          type: message.type,
           chatId,
           userId: user.id,
         });
       } else {
         await saveMessage({
-          message: m.message,
-          type: m.type,
+          message: message.message,
+          type: message.type,
           chatId,
           userId: user.id,
         });

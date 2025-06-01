@@ -8,7 +8,6 @@ import { createServer } from "http";
 import userRouter from "./routers/userRouter";
 import "@/auth/JwtStrategy";
 import "@/auth/GoogleStrategy";
-import "@/lib/cloudinary";
 import chatRouter from "./routers/chatRouter";
 import setupSocket from "./socket";
 

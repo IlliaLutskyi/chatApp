@@ -1,7 +1,6 @@
-import cloudinary from "cloudinary";
 import prisma from "@/lib/db";
 import { Request, Response } from "express";
-import fs from "fs";
+import { getImageString } from "@/utils/getImageString";
 
 async function editProfile(req: Request, res: Response) {
   const image = req.file;
@@ -10,12 +9,7 @@ async function editProfile(req: Request, res: Response) {
   let imageUrl = null;
   try {
     if (image) {
-      const { url } = await cloudinary.v2.uploader.upload(image.path, {
-        folder: "profileImages",
-        public_id: userId ? userId.toString() : "",
-      });
-      imageUrl = url;
-      fs.unlinkSync(image.path);
+      imageUrl = getImageString(image);
     }
     if (imageUrl) {
       await prisma.user.update({
