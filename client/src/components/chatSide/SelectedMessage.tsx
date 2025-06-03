@@ -1,9 +1,9 @@
 import { Box, Button, Typography } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { AnimatePresence, motion } from "framer-motion";
-import useSelectedMessageStore from "../../../stores/useSelectedMessageStore";
+import useSelectedMessageStore from "../../stores/useSelectedMessageStore";
 
-const MotionBox = motion(Box);
+const MotionBox = motion.create(Box);
 const SelectedMessage = () => {
   const { selectedMessage, setSelectedMessage, setIsOn, isOn } =
     useSelectedMessageStore((store) => store);

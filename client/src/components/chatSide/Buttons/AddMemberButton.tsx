@@ -1,5 +1,5 @@
 import { Button } from "@mui/material";
-import useAddMemberStore from "../../../../stores/useAddMemberStore";
+import useAddMemberStore from "../../../stores/useAddMemberStore";
 import AddIcon from "@mui/icons-material/Add";
 
 const AddMemberButton = () => {

@@ -1,9 +1,9 @@
 import { Box } from "@mui/material";
-import { socket } from "../../../lib/io";
+import { socket } from "../../lib/io";
 import { useEffect, useRef, useState } from "react";
 import { useSearchParams } from "react-router";
 import Message from "./Message";
-import { Message as TMessage } from "../../../types/Message";
+import { Message as TMessage } from "../../types/Message";
 
 const Messages = () => {
   const [messages, setMessages] = useState<TMessage[]>();
@@ -18,7 +18,7 @@ const Messages = () => {
         }, 100);
       }
     };
-    socket.emit("chatId", searchParams.get("chat"));
+    socket.emit("connectToRoom", searchParams.get("chat"));
     socket.on("message", getMessages);
     return () => {
       socket.off("message", getMessages);

@@ -1,8 +1,8 @@
 import { Box, Button } from "@mui/material";
-import OptimizedImage from "../../common/OptimizedImage";
+import OptimizedImage from "../common/OptimizedImage";
 import CloseIcon from "@mui/icons-material/Close";
 import { AnimatePresence, motion } from "framer-motion";
-const MotionBox = motion(Box);
+const MotionBox = motion.create(Box);
 type props = {
   url: string;
 

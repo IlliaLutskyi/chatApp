@@ -1,16 +1,18 @@
 import { Box, Button, Typography } from "@mui/material";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
-import Input from "../../common/Input";
+import Input from "../common/Input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { QueryClient, useMutation } from "@tanstack/react-query";
-import { api } from "../../../lib/api";
-import useGroupSideMenuStore from "../../../stores/useGroupSideMenuStore";
+import { api } from "../../lib/api";
+import useGroupSideMenuStore from "../../stores/useGroupSideMenuStore";
 import { AnimatePresence, motion } from "framer-motion";
 import { toast } from "sonner";
 import axios from "axios";
-import BackButton from "../../common/BackButton";
-const MotionBox = motion(Box);
+import BackButton from "../common/BackButton";
+
+const MotionBox = motion.create(Box);
+
 const GroupSchema = z.object({
   title: z.string().min(1, "Group name is required"),
   image: z
@@ -25,7 +27,9 @@ const GroupSchema = z.object({
     )
     .optional(),
 });
+
 type group = z.infer<typeof GroupSchema>;
+
 const CreateChatForm = () => {
   const queryClient = new QueryClient();
   const { register, handleSubmit, formState, setValue } = useForm<group>({
@@ -84,6 +88,7 @@ const CreateChatForm = () => {
           >
             <Input
               field="title"
+              id="title"
               register={register}
               label="Group name"
               labelClassName="!text-xs !text-white"
@@ -93,6 +98,7 @@ const CreateChatForm = () => {
             />
             <Input
               field="image"
+              id="image"
               label="Group image"
               labelClassName="!text-xs !text-white"
               onChange={(e) => {

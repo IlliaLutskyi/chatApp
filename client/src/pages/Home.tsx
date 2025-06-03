@@ -1,13 +1,11 @@
 import { Box } from "@mui/material";
-import GroupsSide from "../components/user/groupsSide/GroupsSide";
-import ChatSide from "../components/user/chatSide/ChatSide";
+import GroupsSide from "../components/groupsSide/GroupsSide";
+import ChatSide from "../components/chatSide/ChatSide";
 import { useQuery } from "@tanstack/react-query";
 import { api } from "../lib/api";
 import { User } from "../types/User";
 import useUserStore from "../stores/useUserStore";
 import { useEffect } from "react";
-import { socket } from "../lib/io";
-
 const Home = () => {
   const setUser = useUserStore((store) => store.setUser);
   const { data, isSuccess } = useQuery({
@@ -19,13 +17,6 @@ const Home = () => {
     },
     queryKey: ["user"],
   });
-  useEffect(() => {
-    socket.on("connect", () => {});
-
-    return () => {
-      socket.off("connect");
-    };
-  }, []);
   useEffect(() => {
     if (isSuccess) {
       setUser(data);

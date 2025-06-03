@@ -1,12 +1,12 @@
 import { Box, Checkbox } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 import { useSearchParams } from "react-router";
-import { Message as TMessage } from "../../../types/Message";
-import { socket } from "../../../lib/io";
+import { Message as TMessage } from "../../types/Message";
+import { socket } from "../../lib/io";
 import Message from "./Message";
-import useSelectionModeStore from "../../../stores/useSelectionModeStore";
+import useSelectionModeStore from "../../stores/useSelectionModeStore";
 import SelectionModeBar from "./SelectionModeBar";
-import useUserStore from "../../../stores/useUserStore";
+import useUserStore from "../../stores/useUserStore";
 
 const SelectionMode = () => {
   const [searchParams] = useSearchParams();

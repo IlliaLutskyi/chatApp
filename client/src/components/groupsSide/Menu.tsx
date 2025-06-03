@@ -9,9 +9,9 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import SettingsIcon from "@mui/icons-material/Settings";
+import useGroupSideMenuStore from "../../stores/useGroupSideMenuStore";
+import useUserStore from "../../stores/useUserStore";
 
-import useGroupSideMenuStore from "../../../stores/useGroupSideMenuStore";
-import useUserStore from "../../../stores/useUserStore";
 const ProfileMenu = () => {
   const user = useUserStore((store) => store.user);
   const [anchorEl, setAnchorEl] = useState<HTMLElement>();

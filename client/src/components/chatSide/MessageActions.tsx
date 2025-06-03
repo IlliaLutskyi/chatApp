@@ -3,7 +3,7 @@ import { Message } from "@/types/Message";
 import { Box, Button } from "@mui/material";
 import { AnimatePresence, motion } from "framer-motion";
 import { useRef } from "react";
-const MotionBox = motion(Box);
+const MotionBox = motion.create(Box);
 type props = {
   isOpen: boolean;
   message: Message;

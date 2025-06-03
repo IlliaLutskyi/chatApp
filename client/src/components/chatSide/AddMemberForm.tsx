@@ -1,11 +1,11 @@
 import { useForm } from "react-hook-form";
-import useAddMemberStore from "../../../stores/useAddMemberStore";
+import useAddMemberStore from "../../stores/useAddMemberStore";
 import { z } from "zod";
 import { AnimatePresence, motion } from "framer-motion";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { api } from "../../../lib/api";
-import Input from "../../common/Input";
+import { api } from "../../lib/api";
+import Input from "../common/Input";
 import { Button, Typography } from "@mui/material";
 import axios from "axios";
 import { useEffect, useRef } from "react";
@@ -84,6 +84,7 @@ const AddMemberForm = () => {
 
           <Input
             register={register}
+            id="phone_number"
             field="phone_number"
             className="bg-black !text-white "
             placeholder="Enter friend's phone number"

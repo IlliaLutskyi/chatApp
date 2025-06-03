@@ -2,8 +2,8 @@ import SearchIcon from "@mui/icons-material/Search";
 import { Box, FormControl, InputAdornment, OutlinedInput } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
-import { api } from "../../../lib/api";
-import { Chat } from "../../../types/Chat";
+import { api } from "../../lib/api";
+import { Chat } from "../../types/Chat";
 import Hints from "./Hints";
 import CloseIcon from "@mui/icons-material/Close";
 const SearchBox = () => {

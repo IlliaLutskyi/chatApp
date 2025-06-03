@@ -1,9 +1,9 @@
 import { Box, Typography } from "@mui/material";
-import { Chat } from "../../../types/Chat";
-import OptimizedImage from "../../common/OptimizedImage";
+import { Chat } from "../../types/Chat";
+import OptimizedImage from "../common/OptimizedImage";
 import { useEffect, useRef } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { api } from "../../../lib/api";
+import { api } from "../../lib/api";
 import { useSearchParams } from "react-router";
 type props = {
   chats: Chat[];

@@ -1,7 +1,7 @@
 import { Button } from "@mui/material";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { api } from "../../../../lib/api";
+import { api } from "../../../lib/api";
 import { useSearchParams } from "react-router";
 
 const LeaveChatButton = () => {

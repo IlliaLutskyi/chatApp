@@ -2,22 +2,20 @@ import { Box } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 import { useSearchParams } from "react-router";
 import { motion, AnimatePresence } from "framer-motion";
-import { api } from "../../../lib/api";
-import { Chat } from "../../../types/Chat";
-import { User } from "../../../types/User";
-import useChatSettingsStore from "../../../stores/useChatSettingsStore";
+import { api } from "../../lib/api";
+import { Chat } from "../../types/Chat";
+import { User } from "../../types/User";
 import { useEffect } from "react";
-import useChatSideMenuStore from "../../../stores/useChatSideMenuStore";
+import useChatSideMenuStore from "../../stores/useChatSideMenuStore";
 import Chat_Info from "./Chat_Info";
 import EditChat from "./EditChat";
 
-const MotionBox = motion(Box);
+const MotionBox = motion.create(Box);
 type props = {
   chat: Chat | undefined;
 };
 const ChatSettings = ({ chat }: props) => {
-  const isOpen = useChatSettingsStore((store) => store.isOpen);
-  const currentOption = useChatSideMenuStore((store) => store.currentOption);
+  const { currentOption, isOpen } = useChatSideMenuStore((store) => store);
   const [searchParams] = useSearchParams();
   const { data: members, refetch } = useQuery({
     queryFn: async () => {

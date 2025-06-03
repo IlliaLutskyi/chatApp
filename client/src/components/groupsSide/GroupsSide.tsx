@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 
-import useGroupSideMenuStore from "../../../stores/useGroupSideMenuStore";
+import useGroupSideMenuStore from "../../stores/useGroupSideMenuStore";
 import Profile from "./Profile";
 import EditProfile from "./EditProfile";
 import CreateChatForm from "./CreateChatForm";

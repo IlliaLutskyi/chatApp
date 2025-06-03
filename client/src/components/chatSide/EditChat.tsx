@@ -1,14 +1,14 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import Input from "../../common/Input";
+import Input from "../common/Input";
 import { useForm } from "react-hook-form";
-import { Chat } from "../../../types/Chat";
+import { Chat } from "../../types/Chat";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { api } from "../../../lib/api";
+import { api } from "../../lib/api";
 import { Box, Button } from "@mui/material";
 import axios from "axios";
 import { useSearchParams } from "react-router";
-import BackButton from "../../common/BackButton";
+import BackButton from "../common/BackButton";
 import { toast } from "sonner";
 import useChatSideMenuStore from "@/stores/useChatSideMenuStore";
 
@@ -78,6 +78,7 @@ const EditChat = ({ chat }: props) => {
       >
         <Input
           field="title"
+          id="title"
           label="group name"
           labelClassName="!text-xs !text-white"
           register={register}
@@ -87,6 +88,7 @@ const EditChat = ({ chat }: props) => {
         />
         <Input
           label="group image"
+          id="image"
           type="file"
           labelClassName="!text-xs !text-white"
           onChange={(e) => {

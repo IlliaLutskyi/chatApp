@@ -1,13 +1,13 @@
 import { Box, Typography } from "@mui/material";
 import { motion } from "framer-motion";
-import useUserStore from "../../../stores/useUserStore";
-import { Message as TMessage } from "../../../types/Message";
-import OptimizedImage from "../../common/OptimizedImage";
-import useSelectionModeStore from "../../../stores/useSelectionModeStore";
+import useUserStore from "../../stores/useUserStore";
+import { Message as TMessage } from "../../types/Message";
+import OptimizedImage from "../common/OptimizedImage";
+import useSelectionModeStore from "../../stores/useSelectionModeStore";
 import MessageActions from "./MessageActions";
 import { useEffect, useRef, useState } from "react";
 
-const MotionBox = motion(Box);
+const MotionBox = motion.create(Box);
 type props = {
   message: TMessage;
 };

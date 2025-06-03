@@ -2,11 +2,11 @@ import { Avatar, Box, Typography } from "@mui/material";
 import ProfileMenu from "./Menu";
 import SearchBox from "./SearchBox";
 import { useQuery } from "@tanstack/react-query";
-import { Chat } from "../../../types/Chat";
-import { api } from "../../../lib/api";
+import { Chat } from "../../types/Chat";
+import { api } from "../../lib/api";
 import { useSearchParams } from "react-router";
 import { AnimatePresence, motion } from "framer-motion";
-const MotionBox = motion(Box);
+const MotionBox = motion.create(Box);
 const Groups = () => {
   const { data } = useQuery({
     queryFn: async () => {

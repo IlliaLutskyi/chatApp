@@ -1,9 +1,9 @@
 import { Box, Button, TextField } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
-import { socket } from "../../../lib/io";
+import { socket } from "../../lib/io";
 import { useEffect, useState } from "react";
 import SelectedFile from "./SelectedFile";
-import { getUrl } from "../../../utils/getUrl";
+import { getUrl } from "../../utils/getUrl";
 import SelectedMessage from "./SelectedMessage";
 import useSelectedMessageStore from "@/stores/useSelectedMessageStore";
 import UploadButton from "./Buttons/UploadButton";

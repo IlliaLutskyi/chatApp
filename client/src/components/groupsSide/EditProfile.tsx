@@ -2,17 +2,17 @@ import { Box, Button, Typography } from "@mui/material";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { api } from "../../../lib/api";
+import { api } from "../../lib/api";
 import { AnimatePresence, motion } from "framer-motion";
-import Input from "../../common/Input";
-import useUserStore from "../../../stores/useUserStore";
+import Input from "../common/Input";
+import useUserStore from "../../stores/useUserStore";
 import { useForm } from "react-hook-form";
-import useGroupSideMenuStore from "../../../stores/useGroupSideMenuStore";
+import useGroupSideMenuStore from "../../stores/useGroupSideMenuStore";
 import { toast } from "sonner";
 import axios from "axios";
-import BackButton from "../../common/BackButton";
+import BackButton from "../common/BackButton";
 
-const MotionBox = motion(Box);
+const MotionBox = motion.create(Box);
 
 const UserSchema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -99,6 +99,7 @@ const EditProfile = () => {
         >
           <Input
             label="Name"
+            id="name"
             field="name"
             register={register}
             defaultValue={user?.name}
@@ -108,6 +109,7 @@ const EditProfile = () => {
           />
           <Input
             label="Phone number"
+            id="phone_number"
             field="phone_number"
             register={register}
             labelClassName="!text-xs !text-white"
@@ -117,6 +119,7 @@ const EditProfile = () => {
           />
           <Input
             label="Image"
+            id="image"
             type="file"
             labelClassName="!text-xs !text-white"
             className="bg-white text-black p-2"

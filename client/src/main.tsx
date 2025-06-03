@@ -9,7 +9,7 @@ import { createBrowserRouter, redirect, RouterProvider } from "react-router";
 import { Home, Login, Signup } from "./pages";
 import ReactGueryWraper from "./components/wrappers/ReactGueryWrapper";
 import isAuthenticated from "./utils/isAuthenticated";
-import ErrorBoundary from "./components/ErrorBoundary";
+import ErrorBoundary from "./components/wrappers/ErrorBoundary";
 import { Toaster } from "./components/ui/sonner";
 
 const router = createBrowserRouter([
@@ -48,7 +48,6 @@ const router = createBrowserRouter([
 ]);
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <></>
     <ReactGueryWraper>
       <RouterProvider router={router} />
       <Toaster />

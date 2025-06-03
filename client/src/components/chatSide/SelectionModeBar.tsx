@@ -1,7 +1,7 @@
 import { Box, Button } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import BackspaceIcon from "@mui/icons-material/Backspace";
-import useSelectionModeStore from "../../../stores/useSelectionModeStore";
+import useSelectionModeStore from "../../stores/useSelectionModeStore";
 import { socket } from "@/lib/io";
 import { toast } from "sonner";
 

@@ -57,6 +57,7 @@ const Login = () => {
       </Typography>
       <Input
         register={register}
+        id="email"
         label="Email"
         field={"email"}
         placeholder="email"
@@ -67,6 +68,7 @@ const Login = () => {
       />
       <Input
         register={register}
+        id="password"
         field={"password"}
         label="Password"
         labelClassName="!text-xs"
@@ -83,6 +85,7 @@ const Login = () => {
       >
         Submit
       </Button>
+
       <Box>
         <Typography sx={{ textAlign: "center", fontSize: "0.9rem" }}>
           Still does not have an account{" "}
@@ -91,6 +94,7 @@ const Login = () => {
           </Link>
         </Typography>
       </Box>
+
       <Box className="relative border-t-[1px] border-black pt-4 flex flex-col justify-center">
         <Typography className="absolute top-[-20px] left-1/2 bg-white p-2 translate-x-[-50%]">
           or

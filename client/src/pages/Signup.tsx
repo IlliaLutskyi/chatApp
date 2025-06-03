@@ -57,6 +57,7 @@ const Signup = () => {
 
       <Input
         register={register}
+        id="name"
         field={"name"}
         label="Name"
         placeholder="name"
@@ -66,6 +67,7 @@ const Signup = () => {
       />
       <Input
         register={register}
+        id="email"
         field={"email"}
         label="Email"
         placeholder="email"
@@ -75,6 +77,7 @@ const Signup = () => {
       />
       <Input
         register={register}
+        id="password"
         field={"password"}
         type="password"
         label="Password"
@@ -85,6 +88,7 @@ const Signup = () => {
       />
       <Input
         register={register}
+        id="phone_number"
         field={"phone_number"}
         label="Phone number"
         labelClassName="!text-xs"

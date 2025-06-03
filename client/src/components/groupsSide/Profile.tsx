@@ -1,13 +1,13 @@
 import { Box, Typography } from "@mui/material";
 import { AnimatePresence, motion } from "framer-motion";
-import LogoutButton from "../../auth/LogoutButton";
+import LogoutButton from "../auth/LogoutButton";
 import PhoneIcon from "@mui/icons-material/Phone";
-import useUserStore from "../../../stores/useUserStore";
-import EditButton from "../../common/EditButton";
+import useUserStore from "../../stores/useUserStore";
+import EditButton from "../common/EditButton";
 import useGroupSideMenuStore from "@/stores/useGroupSideMenuStore";
-import BackButton from "../../common/BackButton";
+import BackButton from "../common/BackButton";
 
-const MotionBox = motion(Box);
+const MotionBox = motion.create(Box);
 const Profile = () => {
   const user = useUserStore((store) => store.user);
   const setCurrentOption = useGroupSideMenuStore(

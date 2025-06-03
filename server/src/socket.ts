@@ -32,7 +32,7 @@ function setupSocket(server: HttpServer) {
     const user = (socket as typeof socket & { user: { id: number } }).user;
     await updateStatus(user.id, "Online");
 
-    socket.on("chatId", async (id) => {
+    socket.on("connectToRoom", async (id) => {
       chatId = Number(id);
       const roomName = `chat_${chatId}`;
       socket.join(roomName);

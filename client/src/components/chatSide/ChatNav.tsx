@@ -1,5 +1,5 @@
 import { Avatar, Box, Typography } from "@mui/material";
-import { Chat } from "../../../types/Chat";
+import { Chat } from "../../types/Chat";
 
 import AddMemberForm from "./AddMemberForm";
 

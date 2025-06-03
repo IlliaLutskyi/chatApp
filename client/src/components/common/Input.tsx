@@ -1,4 +1,4 @@
-import { OutlinedInput, Typography } from "@mui/material";
+import { Box, InputLabel, OutlinedInput, Typography } from "@mui/material";
 import type { FieldValues, Path, UseFormRegister } from "react-hook-form";
 type props<T extends FieldValues> = {
   register?: UseFormRegister<T>;
@@ -9,7 +9,7 @@ type props<T extends FieldValues> = {
   labelClassName?: string;
   placeholder?: string;
   defaultValue?: string;
-  id?: string;
+  id: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   type?: string;
   sx?: object;
@@ -30,13 +30,13 @@ const Input = <T extends FieldValues>({
 }: props<T>) => {
   if (type === "file" || !field || !register) {
     return (
-      <>
-        <Typography className={labelClassName}>
+      <Box className="flex flex-col gap-1">
+        <InputLabel htmlFor={id} className={labelClassName}>
           {label ? label[0].toUpperCase() + label.slice(1) : ""}
-        </Typography>
+        </InputLabel>
         <OutlinedInput
           placeholder={placeholder}
-          id={id ? id : ""}
+          id={id}
           onChange={onChange}
           className={className}
           type={type}
@@ -44,26 +44,26 @@ const Input = <T extends FieldValues>({
           sx={{ ...sx }}
         />
         <Typography className="text-sm text-red-600">{error}</Typography>
-      </>
+      </Box>
     );
   }
   return (
-    <>
-      <Typography className={labelClassName}>
+    <Box className="flex flex-col gap-1">
+      <InputLabel htmlFor={id} className={labelClassName}>
         {label ? label[0].toUpperCase() + label.slice(1) : ""}
-      </Typography>
+      </InputLabel>
       <OutlinedInput
         {...register(field)}
         placeholder={placeholder}
         onChange={onChange}
-        id={id ? id : ""}
+        id={id}
         className={className}
         type={type}
         defaultValue={defaultValue ? defaultValue : ""}
         sx={{ ...sx }}
       />
       <Typography className="text-sm text-red-600">{error}</Typography>
-    </>
+    </Box>
   );
 };
 

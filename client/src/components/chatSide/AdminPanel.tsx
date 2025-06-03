@@ -1,6 +1,6 @@
 import { Box, Switch, Typography } from "@mui/material";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { api } from "../../../lib/api";
+import { api } from "../../lib/api";
 import { useSearchParams } from "react-router";
 import { useEffect, useState } from "react";
 import axios from "axios";
