@@ -1,0 +1,36 @@
+services:
+  frontend:
+    build: ./client
+    environment:
+      - VITE_BACKEND_ORIGIN=http://localhost:3000
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+  backend:
+    build: ./server
+    restart: always
+    environment:
+      - JWT_SECRET=
+      - DATABASE_URL=
+      - FRONT_END_ORIGIN=
+      - GOOGLE_CLIENT_ID=
+      - GOOGLE_CLIENT_SECRET=
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+  db:
+    image: postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=
+
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
+    driver: local

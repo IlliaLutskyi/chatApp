@@ -189,6 +189,10 @@ const config = {
         "fromEnvVar": null,
         "value": "windows",
         "native": true
+      },
+      {
+        "fromEnvVar": null,
+        "value": "linux-musl-openssl-3.0.x"
       }
     ],
     "previewFeatures": [],
@@ -214,8 +218,8 @@ const config = {
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"./generated/client\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  id          Int         @id @default(autoincrement())\n  name        String\n  phoneNumber String      @unique\n  email       String      @unique\n  image       String?\n  password    String?\n  status      Status      @default(Offline)\n  createdAt   DateTime    @default(now())\n  updatedAt   DateTime    @updatedAt\n  chats       chatUsers[]\n  messages    Message[]\n}\n\nmodel Chat {\n  id        Int         @id @default(autoincrement())\n  userId    Int\n  image     String?\n  title     String      @db.VarChar(50)\n  messages  Message[]\n  private   Boolean     @default(false)\n  createdAt DateTime    @default(now())\n  updatedAt DateTime    @updatedAt\n  users     chatUsers[]\n}\n\nmodel Message {\n  id        Int         @id @default(autoincrement())\n  type      TypeMessage\n  image     String?\n  content   String\n  createdAt DateTime    @default(now())\n  chatId    Int\n  userId    Int\n  chat      Chat        @relation(fields: [chatId], references: [id])\n  user      User        @relation(fields: [userId], references: [id])\n}\n\nmodel chatUsers {\n  userId Int\n  chatId Int\n  role   Role @default(guest)\n  user   User @relation(fields: [userId], references: [id])\n  chat   Chat @relation(fields: [chatId], references: [id])\n\n  @@id([userId, chatId])\n}\n\nenum Role {\n  admin\n  guest\n}\n\nenum Status {\n  Online\n  Offline\n}\n\nenum TypeMessage {\n  file\n  text\n  media\n}\n",
-  "inlineSchemaHash": "6b4853f30a1d61eb0f7cf4d6e751e7f913feaed4502dac8734d37cf1ff96eb27",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider      = \"prisma-client-js\"\n  output        = \"./generated/client\"\n  binaryTargets = [\"native\", \"linux-musl-openssl-3.0.x\"]\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  id          Int         @id @default(autoincrement())\n  name        String\n  phoneNumber String      @unique\n  email       String      @unique\n  image       String?\n  password    String?\n  status      Status      @default(Offline)\n  createdAt   DateTime    @default(now())\n  updatedAt   DateTime    @updatedAt\n  chats       chatUsers[]\n  messages    Message[]\n}\n\nmodel Chat {\n  id        Int         @id @default(autoincrement())\n  userId    Int\n  image     String?\n  title     String      @db.VarChar(50)\n  messages  Message[]\n  private   Boolean     @default(false)\n  createdAt DateTime    @default(now())\n  updatedAt DateTime    @updatedAt\n  users     chatUsers[]\n}\n\nmodel Message {\n  id        Int         @id @default(autoincrement())\n  type      TypeMessage\n  image     String?\n  content   String\n  createdAt DateTime    @default(now())\n  chatId    Int\n  userId    Int\n  chat      Chat        @relation(fields: [chatId], references: [id])\n  user      User        @relation(fields: [userId], references: [id])\n}\n\nmodel chatUsers {\n  userId Int\n  chatId Int\n  role   Role @default(guest)\n  user   User @relation(fields: [userId], references: [id])\n  chat   Chat @relation(fields: [chatId], references: [id])\n\n  @@id([userId, chatId])\n}\n\nenum Role {\n  admin\n  guest\n}\n\nenum Status {\n  Online\n  Offline\n}\n\nenum TypeMessage {\n  file\n  text\n  media\n}\n",
+  "inlineSchemaHash": "721f79be5b0eafa6cb33c0d1c2b106f55391ddebe0c3586283945e2ea41ef97c",
   "copyEngine": true
 }
 
@@ -256,6 +260,10 @@ Object.assign(exports, Prisma)
 // file annotations for bundling tools to include these files
 path.join(__dirname, "query_engine-windows.dll.node");
 path.join(process.cwd(), "prisma/generated/client/query_engine-windows.dll.node")
+
+// file annotations for bundling tools to include these files
+path.join(__dirname, "libquery_engine-linux-musl-openssl-3.0.x.so.node");
+path.join(process.cwd(), "prisma/generated/client/libquery_engine-linux-musl-openssl-3.0.x.so.node")
 // file annotations for bundling tools to include these files
 path.join(__dirname, "schema.prisma");
 path.join(process.cwd(), "prisma/generated/client/schema.prisma")

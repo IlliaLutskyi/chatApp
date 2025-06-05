@@ -9,6 +9,11 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 export default defineConfig({
+  base: "./",
+  server: {
+    host: "0.0.0.0",
+    port: 5173,
+  },
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
